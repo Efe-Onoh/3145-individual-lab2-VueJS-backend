@@ -22,3 +22,29 @@ app.use(function(request, response, next) {
 //static file middleware
 var staticPath = path.resolve(__dirname, "static");
 app.use(express.static(staticPath));
+
+//file not found middleware
+
+app.use(function(request, response, next) {
+    response.writeHead(200, { "Content-Type": "text/plain" });
+    response.end("Error: Looks like you did not find the file you were looking for");
+});
+
+//connect to MongoDB
+
+const MongoClient = require('mongodb').MongoClient;
+let db;
+
+MongoClient.connect(uri,(err, client) =>{
+    db = client.db('webstore');
+})
+
+
+app.get('/hgh', (req, res, next) =>{
+    res.send('Select a collection, e.g /collection/messages')
+})
+
+const port = process.env.PORT || 3000;
+
+
+app.listen(port);
