@@ -18,3 +18,7 @@ app.use(function(request, response, next) {
     console.log("In comes a request to: " + request.url);
     next();
 });
+
+//static file middleware
+var staticPath = path.resolve(__dirname, "static");
+app.use(express.static(staticPath));
