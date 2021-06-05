@@ -73,6 +73,18 @@ app.post('/collection/:collectionName', (req, res, next) => {
     })
 })
 
+//update an object 
+app.put('/collection/:collectionName/:id', (req, res, next) => {
+    req.collection.update(
+    {_id: new ObjectID(req.params.id)},
+    {$set: req.body},
+    {safe: true, multi: false},
+    (e, result) => {
+    if (e) return next(e)
+    res.send((result.result.n === 1) ? {msg: 'success'} : {msg: 'error'})
+    })
+ })
+
 //file not found middleware
 
 app.use(function(request, response, next) {
