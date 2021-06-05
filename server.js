@@ -23,12 +23,7 @@ app.use(function(request, response, next) {
 var staticPath = path.resolve(__dirname, "static");
 app.use(express.static(staticPath));
 
-//file not found middleware
 
-//app.use(function(request, response, next) {
-  //  response.writeHead(200, { "Content-Type": "text/plain" });
-    //response.end("Error: Looks like you did not find the file you were looking for");
-//});
 
 //connect to MongoDB
 
@@ -70,6 +65,20 @@ app.get('/collection/:collectionName', (req, res, next) => {
 
 })
 
+//adding post
+app.post('/collection/:collectionName', (req, res, next) => {
+    req.collection.insert(req.body, (e, results) => {
+        if(e) return next(e)
+        res.send(results.ops)
+    })
+})
+
+//file not found middleware
+
+app.use(function(request, response, next) {
+    response.writeHead(200, { "Content-Type": "text/plain" });
+    response.end("Error: Looks like you did not find the file you were looking for");
+});
 
 const port = process.env.PORT || 3000;
 
