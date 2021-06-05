@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express();
 const path = require("path");
 
-var uri = process.env.URI;
+var uri = process.env.URI || process.env.DATABASE_URL;
 
 app.use(cors());
 
