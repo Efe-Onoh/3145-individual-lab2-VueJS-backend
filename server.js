@@ -87,9 +87,9 @@ app.get('/collection/:collectionName/:id', (req, res, next) => {
 
 
 //update an object finding the object by subject
-app.put('/collection/:collectionName/:subject', (req, res, next) => {
+app.put('/collection/:collectionName/:id', (req, res, next) => {
     req.collection.update(
-    {subject: req.params.subject},
+    {_id: new ObjectID(req.params.id)},
     {$set: req.body},
     {safe: true, multi: false},
     (e, result) => {
