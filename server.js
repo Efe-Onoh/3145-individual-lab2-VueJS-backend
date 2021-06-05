@@ -90,7 +90,7 @@ app.get('/collection/:collectionName/:id', (req, res, next) => {
 app.put('/collection/:collectionName/:subject', (req, res, next) => {
     req.collection.update(
     {subject: req.params.subject},
-    {$set: {numberOfSpaces: 1}},
+    {$set: req.body},
     {safe: true, multi: false},
     (e, result) => {
     if (e) return next(e)
