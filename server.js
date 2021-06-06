@@ -86,7 +86,7 @@ app.get('/collection/:collectionName/:id', (req, res, next) => {
 })
 
 
-//update an object finding the object by subject
+//update an object finding the object by id
 app.put('/collection/:collectionName/:id', (req, res, next) => {
     let lesson = req.body;
     req.collection.update(
